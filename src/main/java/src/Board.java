@@ -11,6 +11,14 @@ public class Board {
         }
     }
 
+    public char[][] getCells() {
+        char[][] copy = new char[cells.length][cells[0].length];
+        for (int i = 0; i < cells.length; i++) {
+            System.arraycopy(cells[i], 0, copy[i], 0, cells[i].length);
+        }
+        return copy;
+    }
+
     public boolean isCellEmpty(int row, int col) {
         return cells[row][col] == ' ';
     }
