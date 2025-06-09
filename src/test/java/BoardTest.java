@@ -80,4 +80,44 @@ class BoardTest {
         assertEquals(' ', board.isFull(1, 1) ? 'O' : ' ', "Expected cell (1, 1) to remain unchanged.");
         assertEquals(' ', board.isFull(2, 2) ? 'X' : ' ', "Expected cell (2, 2) to remain unchanged.");
     }
+
+
+    @Test
+    void testPrintBoardInitialState() {
+        Board board = new Board();
+        String expectedOutput = String.join(System.lineSeparator(),
+                "|  |  |  |",
+                "|  |  |  |",
+                "|  |  |  |"
+        );
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        board.printBoard();
+        System.setOut(System.out);
+
+        assertEquals(expectedOutput, outContent.toString().trim(), "Expected empty board layout.");
+    }
+
+    @Test
+    void testPrintBoardWithMoves() {
+        Board board = new Board();
+        board.place(0, 1, 'X');
+        board.place(1, 1, 'O');
+        board.place(2, 0, 'X');
+
+        String expectedOutput = String.join(System.lineSeparator(),
+                "|  |X |  |",
+                "|  |O |  |",
+                "|X |  |  |"
+        );
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        board.printBoard();
+        System.setOut(System.out);
+
+        assertEquals(expectedOutput, outContent.toString().trim(), "Expected correct board with moves.");
+    }
+
 }
