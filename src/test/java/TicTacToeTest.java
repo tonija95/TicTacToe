@@ -36,4 +36,106 @@ class TicTacToeTest {
         assertTrue(output.contains("This cell is occupied! Try again..."),
                 "Expected warning for attempting to overwrite an occupied cell was not displayed.");
     }
+
+    /**
+     * Test the start method for a game resulting in a draw scenario.
+     */
+    @Test
+    void testStartGameDraw() {
+        String mockInput = "0\n0\n0\n1\n0\n2\n1\n1\n1\n0\n1\n2\n2\n1\n2\n0\n2\n2\nn\n";
+        System.setIn(new ByteArrayInputStream(mockInput.getBytes()));
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        TicTacToe game = new TicTacToe();
+        game.start();
+
+        System.setIn(System.in);
+        System.setOut(System.out);
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("It's a draw!"), "Expected draw message not found.");
+        assertTrue(output.contains("Thank you for playing!"), "Thank you message not found.");
+    }
+
+    /**
+     * Test the start method for a game resulting in a win scenario.
+     */
+    @Test
+    void testStartGameWin() {
+        String mockInput = "0\n0\n1\n0\n0\n1\n1\n1\n0\n2\nn\n";
+        System.setIn(new ByteArrayInputStream(mockInput.getBytes()));
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        TicTacToe game = new TicTacToe();
+        game.start();
+
+        System.setIn(System.in);
+        System.setOut(System.out);
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("Congratulations! Player X won!"), "Expected win message not found for Player X.");
+        assertTrue(output.contains("Thank you for playing!"), "Thank you message not found.");
+    }
+
+
+    /**
+     * Test to ensure the switchCurrentPlayer method alternates between players correctly.
+     */
+    @Test
+    void testSwitchCurrentPlayer() {
+        // Create a new TicTacToe instance
+        TicTacToe game = new TicTacToe();
+
+        // Verify initial player is player1
+        assertTrue(getCurrentPlayerMarker(game) == 'X', "Player 1 should be the starting player.");
+
+        // Switch to player2
+        invokeSwitchCurrentPlayer(game);
+        assertTrue(getCurrentPlayerMarker(game) == 'O', "Current player should switch to Player 2.");
+
+        // Switch back to player1
+        invokeSwitchCurrentPlayer(game);
+        assertTrue(getCurrentPlayerMarker(game) == 'X', "Current player should switch back to Player 1.");
+    }
+
+    /**
+     * Utility method to get the current player's marker for testing.
+     *
+     * @param game The TicTacToe game instance.
+     * @return The marker of the current player.
+     */
+    private char getCurrentPlayerMarker(TicTacToe game) {
+        try {
+            var currentPlayerField = TicTacToe.class.getDeclaredField("currentPlayer");
+            currentPlayerField.setAccessible(true);
+            var currentPlayer = currentPlayerField.get(game);
+
+            var markerField = currentPlayer.getClass().getDeclaredField("marker");
+            markerField.setAccessible(true);
+            return (char) markerField.get(currentPlayer);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to access currentPlayer's marker.", e);
+        }
+    }
+
+    /**
+     * Utility method to invoke the private switchCurrentPlayer method for testing.
+     *
+     * @param game The TicTacToe game instance.
+     */
+    private void invokeSwitchCurrentPlayer(TicTacToe game) {
+        try {
+            var switchMethod = TicTacToe.class.getDeclaredMethod("switchCurrentPlayer");
+            switchMethod.setAccessible(true);
+            switchMethod.invoke(game);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to invoke switchCurrentPlayer method.", e);
+        }
+    }
+
 }

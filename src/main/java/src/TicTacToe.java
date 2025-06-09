@@ -37,6 +37,16 @@ public class TicTacToe {
                 }
                 isEmpty = board.isFull(row, col);
             }
+
+            if (hasWinner()) {
+                switchCurrentPlayer();
+                System.out.printf("Congratulations! Player %s won!%n", currentPlayer.getMarker());
+                break;
+            }
+        }
+
+        if (!hasWinner()) {
+            System.out.println("It's a draw!");
         }
 
         System.out.println("Thank you for playing!");
@@ -52,4 +62,33 @@ public class TicTacToe {
             currentPlayer=player1;
         }
     }
+
+    public boolean hasWinner() {
+        char[][] cells = board.getCells();
+
+        // Zeilen prüfen
+        for (int i = 0; i < 3; i++) {
+            if (cells[i][0] != ' ' &&
+                    cells[i][0] == cells[i][1] &&
+                    cells[i][1] == cells[i][2]) {
+                return true;
+            }
+        }
+
+        // Spalten prüfen
+        for (int i = 0; i < 3; i++) {
+            if (cells[0][i] != ' ' &&
+                    cells[0][i] == cells[1][i] &&
+                    cells[1][i] == cells[2][i]) {
+                return true;
+            }
+        }
+
+        // Diagonale prüfen
+        if (cells[0][0] != ' ' && cells[0][0] == cells[1][1] && cells[1][1] == cells[2][2]) return true;
+        if (cells[0][2] != ' ' && cells[0][2] == cells[1][1] && cells[1][1] == cells[2][0]) return true;
+
+        return false;
+    }
+
 }

@@ -123,4 +123,34 @@ class BoardTest {
         assertEquals(expectedOutput, outContent.toString().trim(), "Expected correct board with moves.");
     }
 
+    @Test
+    void testGetCellsReturnsCorrectInitialState () {
+        Board board = new Board();
+        char[][] cells = board.getCells();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                assertEquals(' ', cells[i][j], "Expected cell (" + i + ", " + j + ") to be empty.");
+            }
+        }
+    }
+
+    @Test
+    void testGetCellsReturnsUpdatedState () {
+        Board board = new Board();
+        board.place(0, 0, 'X');
+        board.place(1, 1, 'O');
+        char[][] cells = board.getCells();
+        assertEquals('X', cells[0][0], "Expected cell (0, 0) to contain 'X'.");
+        assertEquals('O', cells[1][1], "Expected cell (1, 1) to contain 'O'.");
+        assertEquals(' ', cells[2][2], "Expected cell (2, 2) to remain empty.");
+    }
+
+    @Test
+    void testGetCellsReturnsCopy () {
+        Board board = new Board();
+        char[][] cells = board.getCells();
+        cells[0][0] = 'X';  // Modify the returned array
+        assertTrue(board.isCellEmpty(0, 0), "Expected internal board state to remain unchanged.");
+    }
+
 }
