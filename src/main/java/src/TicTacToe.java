@@ -21,6 +21,8 @@ public class TicTacToe {
         for (int i = 0; i < 9; i++) {
             System.out.printf("Current player: %s%n", currentPlayer.getMarker());
 
+            board.printBoard();
+
             boolean isEmpty=false;
 
             while(!isEmpty) {
