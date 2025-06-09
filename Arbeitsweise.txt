@@ -1,0 +1,22 @@
+## Arbeitsweise im Team
+
+### Branching
+- Jeder User Story wird ein eigener Feature-Branch zugeordnet.
+- Namenskonvention: `feature/US-101`, `feature/US-102`, usw.
+- Diese Branches werden **nicht direkt in `main` gemerged**, sondern über Pull Requests.
+
+### Commits
+- Commit-Messages sind beschreibend, z. B.:
+  - `Add unit tests for hasWinner`
+  - `Fix board print formatting`
+  - `Implement draw condition logic`
+- Commits sind logisch gruppiert und orientieren sich an den User Stories.
+
+### Pull Requests
+- Jede Änderung wird über einen Pull Request in `main` gebracht.
+- Vor dem Merge erfolgt ein Review (z. B. durch das Team oder durch einen zweiten Blick selbst).
+
+### Automatische Tests
+- Bei jedem Push auf einen Feature-Branch wird automatisch ein GitHub Actions Workflow ausgeführt.
+- Der Workflow kompiliert das Projekt und führt die Unit Tests mit Maven aus.
+- Die Ergebnisse sind über die GitHub Actions-Tabs sichtbar (grüne Checks).
