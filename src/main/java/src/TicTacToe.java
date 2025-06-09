@@ -1,3 +1,5 @@
+package src;
+
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -12,9 +14,9 @@ public class TicTacToe {
     public void start() {
         Scanner scn = new Scanner(System.in);
 
-        System.out.println( "Welcome to TicTacToe!");
-        System.out.println("Player 1: "+player1.getMarker());
-        System.out.println("Player 2: "+player2.getMarker());
+        System.out.println( "Welcome to src.TicTacToe!");
+        System.out.println("src.Player 1: "+player1.getMarker());
+        System.out.println("src.Player 2: "+player2.getMarker());
 
         for (int i = 0; i < 9; i++) {
             System.out.printf("Current player: %s %s%n",currentPlayer,currentPlayer.getMarker()+"");

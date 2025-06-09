@@ -1,5 +1,5 @@
-# TicTacToe
-Java - Game - TicTacToe for FH Technikum BWI-BB-2-SS2025-SLT-DE/153253
+# src.TicTacToe
+Java - Game - src.TicTacToe for FH Technikum BWI-BB-2-SS2025-SLT-DE/153253
 
 specification for the project:
 

@@ -1,3 +1,5 @@
+package src;
+
 public class Board {
     private char[][] cells=new char[3][3];
 

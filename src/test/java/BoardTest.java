@@ -1,11 +1,12 @@
 import org.junit.jupiter.api.Test;
+import src.Board;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
 
     /**
-     * Test class for the `isCellEmpty` and `isFull` methods in the `Board` class.
+     * Test class for the `isCellEmpty` and `isFull` methods in the `src.Board` class.
      *
      * The `isCellEmpty` method checks if a specific cell in the board is empty (contains a space character).
      * The `isFull` method checks if a specific cell in the board is occupied (does not contain a space character).

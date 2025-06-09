@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import src.TicTacToe;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -33,7 +34,7 @@ class TicTacToeTest {
         // Check output for appropriate warning and valid move placement
         String output = outputStream.toString();
         assertTrue(output.contains("This cell is occupied! Try again..."), "Warning for occupied cell is missing.");
-        assertTrue(output.contains("Current player: Player 1 X"), "First move not registered correctly.");
-        assertTrue(output.contains("Current player: Player 2 O"), "Second player's move not registered correctly.");
+        assertTrue(output.contains("Current player: src.Player 1 X"), "First move not registered correctly.");
+        assertTrue(output.contains("Current player: src.Player 2 O"), "Second player's move not registered correctly.");
     }
 }
