@@ -19,7 +19,7 @@ public class TicTacToe {
         System.out.println("src.Player 2: "+player2.getMarker());
 
         for (int i = 0; i < 9; i++) {
-            System.out.printf("Current player: %s %s%n",currentPlayer,currentPlayer.getMarker()+"");
+            System.out.printf("Current player: %s%n", currentPlayer.getMarker());
 
             boolean isEmpty=false;
 
