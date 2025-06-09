@@ -81,4 +81,61 @@ class TicTacToeTest {
         assertTrue(output.contains("Thank you for playing!"), "Thank you message not found.");
     }
 
+
+    /**
+     * Test to ensure the switchCurrentPlayer method alternates between players correctly.
+     */
+    @Test
+    void testSwitchCurrentPlayer() {
+        // Create a new TicTacToe instance
+        TicTacToe game = new TicTacToe();
+
+        // Verify initial player is player1
+        assertTrue(getCurrentPlayerMarker(game) == 'X', "Player 1 should be the starting player.");
+
+        // Switch to player2
+        invokeSwitchCurrentPlayer(game);
+        assertTrue(getCurrentPlayerMarker(game) == 'O', "Current player should switch to Player 2.");
+
+        // Switch back to player1
+        invokeSwitchCurrentPlayer(game);
+        assertTrue(getCurrentPlayerMarker(game) == 'X', "Current player should switch back to Player 1.");
+    }
+
+    /**
+     * Utility method to get the current player's marker for testing.
+     *
+     * @param game The TicTacToe game instance.
+     * @return The marker of the current player.
+     */
+    private char getCurrentPlayerMarker(TicTacToe game) {
+        try {
+            var currentPlayerField = TicTacToe.class.getDeclaredField("currentPlayer");
+            currentPlayerField.setAccessible(true);
+            var currentPlayer = currentPlayerField.get(game);
+
+            var markerField = currentPlayer.getClass().getDeclaredField("marker");
+            markerField.setAccessible(true);
+            return (char) markerField.get(currentPlayer);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to access currentPlayer's marker.", e);
+        }
+    }
+
+    /**
+     * Utility method to invoke the private switchCurrentPlayer method for testing.
+     *
+     * @param game The TicTacToe game instance.
+     */
+    private void invokeSwitchCurrentPlayer(TicTacToe game) {
+        try {
+            var switchMethod = TicTacToe.class.getDeclaredMethod("switchCurrentPlayer");
+            switchMethod.setAccessible(true);
+            switchMethod.invoke(game);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to invoke switchCurrentPlayer method.", e);
+        }
+    }
+
 }
