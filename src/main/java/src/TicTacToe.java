@@ -43,7 +43,7 @@ public class TicTacToe {
         scn.close();
     }
 
-    public void switchCurrentPlayer() {
+    private void switchCurrentPlayer() {
         if(currentPlayer==player1) {
             currentPlayer=player2;
         } else if (currentPlayer==player2) {
