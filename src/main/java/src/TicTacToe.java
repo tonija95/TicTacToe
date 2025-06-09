@@ -37,6 +37,12 @@ public class TicTacToe {
                 }
                 isEmpty = board.isFull(row, col);
             }
+
+            if (hasWinner()) {
+                switchCurrentPlayer();
+                System.out.printf("Congratulations! Player %s won!%n", currentPlayer.getMarker());
+                break;
+            }
         }
 
         System.out.println("Thank you for playing!");
