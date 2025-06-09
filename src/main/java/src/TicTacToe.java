@@ -21,6 +21,8 @@ public class TicTacToe {
         for (int i = 0; i < 9; i++) {
             System.out.printf("Current player: %s%n", currentPlayer.getMarker());
 
+            board.printBoard();
+
             boolean isEmpty=false;
 
             while(!isEmpty) {
@@ -43,7 +45,7 @@ public class TicTacToe {
         scn.close();
     }
 
-    public void switchCurrentPlayer() {
+    private void switchCurrentPlayer() {
         if(currentPlayer==player1) {
             currentPlayer=player2;
         } else if (currentPlayer==player2) {
