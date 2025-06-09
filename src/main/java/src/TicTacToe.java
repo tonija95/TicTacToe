@@ -45,6 +45,10 @@ public class TicTacToe {
             }
         }
 
+        if (!hasWinner()) {
+            System.out.println("It's a draw!");
+        }
+
         System.out.println("Thank you for playing!");
 
 
