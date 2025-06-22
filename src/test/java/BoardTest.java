@@ -153,4 +153,44 @@ class BoardTest {
         assertTrue(board.isCellEmpty(0, 0), "Expected internal board state to remain unchanged.");
     }
 
+    @Test
+    void testClearEmptyBoard() {
+        Board board = new Board();
+        board.clear();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                assertTrue(board.isCellEmpty(i, j), "Expected cell (" + i + ", " + j + ") to be empty after clearing an empty board.");
+            }
+        }
+    }
+
+    @Test
+    void testClearPartiallyFilledBoard() {
+        Board board = new Board();
+        board.place(0, 0, 'X');
+        board.place(1, 1, 'O');
+        board.clear();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                assertTrue(board.isCellEmpty(i, j), "Expected cell (" + i + ", " + j + ") to be empty after clearing a partially filled board.");
+            }
+        }
+    }
+
+    @Test
+    void testClearFullyFilledBoard() {
+        Board board = new Board();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board.place(i, j, 'X');
+            }
+        }
+        board.clear();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                assertTrue(board.isCellEmpty(i, j), "Expected cell (" + i + ", " + j + ") to be empty after clearing a fully filled board.");
+            }
+        }
+    }
+
 }
