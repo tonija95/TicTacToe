@@ -15,7 +15,17 @@ class TicTacToeTest {
     @Test
     void testPreventsOverwritingOccupiedCells() {
         // Simulated user input: first move is valid, second targets the same cell (invalid), third is valid again
-        String mockInput = "0 0\n0 0\n0 1\n1 1\n2 2\n1 0\n2 0\n2 1\n1 2\n";
+        String mockInput = ""
+                + "0\n0\n"  // gültiger Zug
+                + "0\n0\n"  // ungültiger Zug (gleiche Zelle)
+                + "0\n1\n"  // gültig
+                + "1\n1\n"  // usw.
+                + "2\n2\n"
+                + "1\n0\n"
+                + "2\n0\n"
+                + "2\n1\n"
+                + "1\n2\n"
+                + "n\n";     // Spiel beenden nach der Partie
         ByteArrayInputStream inputStream = new ByteArrayInputStream(mockInput.getBytes());
         System.setIn(inputStream);
 
