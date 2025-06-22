@@ -15,7 +15,17 @@ class TicTacToeTest {
     @Test
     void testPreventsOverwritingOccupiedCells() {
         // Simulated user input: first move is valid, second targets the same cell (invalid), third is valid again
-        String mockInput = "0 0\n0 0\n0 1\n1 1\n2 2\n1 0\n2 0\n2 1\n1 2\n";
+        String mockInput = ""
+                + "0\n0\n"  // gültiger Zug
+                + "0\n0\n"  // ungültiger Zug (gleiche Zelle)
+                + "0\n1\n"  // gültig
+                + "1\n1\n"  // usw.
+                + "2\n2\n"
+                + "1\n0\n"
+                + "2\n0\n"
+                + "2\n1\n"
+                + "1\n2\n"
+                + "n\n";     // Spiel beenden nach der Partie
         ByteArrayInputStream inputStream = new ByteArrayInputStream(mockInput.getBytes());
         System.setIn(inputStream);
 
@@ -35,6 +45,38 @@ class TicTacToeTest {
         String output = outputStream.toString();
         assertTrue(output.contains("This cell is occupied! Try again..."),
                 "Expected warning for attempting to overwrite an occupied cell was not displayed.");
+    }
+
+    /**
+     * Test the start method for choosing to replay after a draw.
+     */
+    @Test
+    void testStartGamePlayAgain() {
+        String mockInput = ""
+                // Erste Runde (Draw)
+                + "0\n0\n0\n1\n0\n2\n1\n1\n1\n0\n1\n2\n2\n1\n2\n0\n2\n2\n"
+                // Nach der ersten Runde: "Play again?" → y
+                + "y\n"
+                // Zweite Runde: Spieler X gewinnt
+                + "0\n0\n1\n0\n0\n1\n1\n1\n0\n2\n"
+                // Nach der zweiten Runde: "Play again?" → n
+                + "n\n";
+        System.setIn(new ByteArrayInputStream(mockInput.getBytes()));
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        TicTacToe game = new TicTacToe();
+        game.start();
+
+        System.setIn(System.in);
+        System.setOut(System.out);
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("It's a draw!"), "Expected draw message not found.");
+        assertTrue(output.contains("Do you want to play again?"), "Replay prompt not found.");
+        assertTrue(output.contains("Congratulations! Player X won!"), "Expected win message in replay not found.");
+        assertTrue(output.contains("Thank you for playing!"), "Thank you message not found.");
     }
 
     /**

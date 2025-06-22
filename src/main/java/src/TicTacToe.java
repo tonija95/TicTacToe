@@ -18,6 +18,12 @@ public class TicTacToe {
         System.out.println("src.Player 1: "+player1.getMarker());
         System.out.println("src.Player 2: "+player2.getMarker());
 
+
+        boolean newGame=true;
+
+
+        while(newGame) {
+
         for (int i = 0; i < 9; i++) {
             System.out.printf("Current player: %s%n", currentPlayer.getMarker());
 
@@ -50,6 +56,19 @@ public class TicTacToe {
         }
 
         System.out.println("Thank you for playing!");
+
+
+
+        System.out.println("Do you want to play again? (y/n)");
+        String answer = scn.next();
+        if (answer.equals("y")) {
+            board.clear();
+            currentPlayer = player1;
+        } else if (answer.equals("n")) {
+            newGame=false;
+            System.out.println("Goodbye!");
+        }
+    }
 
 
         scn.close();
